@@ -235,7 +235,7 @@ const WorkSection = () => {
               <div
               onClick={() => window.innerWidth < 768 ? setActiveMobile(activeMobile === index ? null : index) : goToDetail(project.id)}
                 onMouseEnter={() => handleMouseEnter(index)}
-                className="relative flex items-center justify-between px-6 md:px-16 py-12 md:py-24 transition-colors duration-500 cursor-pointer group-hover:text-white"
+                className="relative flex items-center justify-between px-6 md:px-16 py-12 md:py-15 transition-colors duration-500 cursor-pointer group-hover:text-white"
               >
                 {/* Black Reveal on Hover */}
                 <div className="absolute inset-0 bg-black scale-y-0 origin-bottom transition-transform duration-600 ease-[cubic-bezier(0.85,0,0.15,1)] group-hover:scale-y-100 -z-0" />
@@ -244,7 +244,7 @@ const WorkSection = () => {
                   <span className="text-xs md:text-sm font-mono opacity-40 group-hover:opacity-60 transition-opacity text-left">
                     / 0{index + 1}
                   </span>
-                  <h3 className="text-4xl md:text-8xl font-normal tracking-tight transition-transform duration-500 group-hover:translate-x-4 md:group-hover:translate-x-8 text-left">
+                  <h3 className="text-4xl md:text-6xl font-normal tracking-tight transition-transform duration-500 group-hover:translate-x-4 md:group-hover:translate-x-8 text-left">
                     {project.name}
                   </h3>
                   <div className="flex flex-wrap gap-3 opacity-30 group-hover:opacity-100 transition-opacity duration-500 group-hover:translate-x-4 md:group-hover:translate-x-8">

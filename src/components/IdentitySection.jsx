@@ -2,6 +2,9 @@ import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Transition from "../components/Transition";
+import Lanyard from '../components/Lanyard/Lanyard';
+
+
 gsap.registerPlugin(ScrollTrigger);
 
 export default function IdentitySection() {
@@ -92,22 +95,15 @@ export default function IdentitySection() {
           </div>
         </div>
 
-        {/* Right Side: Image with Parallax */}
-        <div className="relative flex justify-center mt-10 md:mt-0 lg:justify-end">
-          <div 
-            ref={imageRef}
-            className="w-full max-w-[450px] aspect-3/4  overflow-hidden shadow-2xl"
-          >
-            <img 
-              src='/human-2.jpg'
-              alt="Identity" 
-              className="w-full h-full object-contain scale-110 py-15"
+       <div className="hidden lg:block absolute inset-0 pointer-events-none z-0">
+            <Lanyard
+              position={[0, 0, 20]}
+              gravity={[0, -30, 0]}
+              fov={20}
+              transparent={true}
             />
           </div>
-          
-          {/* Decorative Elements */}
-          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[#fca311] -z-10 hidden lg:block"></div>
-        </div>
+       
       </div>
 
      
