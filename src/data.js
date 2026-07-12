@@ -1,6 +1,24 @@
 export const projects = [
   {
     id: 1,
+    name: "Royal Win Hotel Booking",
+    description:
+      "A full-stack hotel reservation system developed as a KBZ Mini App. Features real-time room availability, seamless booking management, and optimized mobile interfaces for KBZPay ecosystem integration.",
+    href: "",
+    image: "/projects/royalwinhotel.jpeg",
+    bgImage: "/backgrounds/blanket.jpg",
+    year: "2024",
+    role: "Full Stack Development",
+    frameworks: [
+      { id: 1, name: "React (Vite)" },
+      { id: 2, name: "Python" },
+      { id: 3, name: "Django DRF" },
+      { id: 4, name: "Mantis UI" },
+      { id: 5, name: "Tailwind CSS" },
+    ],
+  },
+  {
+    id: 2,
     name: "Mobile Accessories E-commerce",
     description:
       "An online store specializing in phone accessories including cases, chargers, cables, and power banks with MagSafe compatibility.",
@@ -18,7 +36,7 @@ export const projects = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     name: "Plant Shop E-commerce",
     description:
       "An online store specializing in rare and decorative plants with a clean, user-friendly interface.",
@@ -35,7 +53,7 @@ export const projects = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     name: "Apple Tech Marketplace",
     description:
       "An e-commerce platform for Apple products and accessories with deals and category filtering.",
@@ -52,7 +70,7 @@ export const projects = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     name: "Electronics & Gadgets Store",
     description:
       "A multi-category online shop featuring electronics, home appliances, and gaming gear with special offers.",
@@ -69,7 +87,7 @@ export const projects = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     name: "Home Decor Marketplace",
     description:
       "A curated collection of designer home decor items, including furniture and artisan vases.",
@@ -86,7 +104,7 @@ export const projects = [
     ],
   },
   {
-    id: 6,
+    id: 7,
     name: "Digital Game Store",
     description:
       "A gaming platform featuring discounted titles, top sellers, and genre-based browsing.",

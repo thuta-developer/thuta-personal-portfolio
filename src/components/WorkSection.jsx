@@ -11,6 +11,22 @@ gsap.registerPlugin(ScrollTrigger);
 const projects = [
   {
     id: 1,
+    name: "Royal Win Hotel Booking",
+    description:
+      "A full-stack hotel reservation system developed as a KBZ Mini App. Features real-time room availability, seamless booking management, and optimized mobile interfaces for KBZPay ecosystem integration.",
+    href: "",
+    image: "/projects/royalwinhotel.jpeg", 
+    bgImage: "/backgrounds/hotel-bg.jpg",
+    frameworks: [
+      { id: 1, name: "React (Vite)" },
+      { id: 2, name: "Python" },
+      { id: 3, name: "Django DRF" },
+      { id: 4, name: "Mantis UI" },
+      { id: 5, name: "Tailwind CSS" },
+    ],
+  },
+  {
+    id: 2,
     name: "Mobile Accessories E-commerce",
     description:
       "An online store specializing in phone accessories including cases, chargers, cables, and power banks with MagSafe compatibility.",
@@ -26,7 +42,7 @@ const projects = [
     ],
   },
   {
-    id: 2,
+    id: 3,
     name: "Plant Shop E-commerce",
     description:
       "An online store specializing in rare and decorative plants with a clean, user-friendly interface.",
@@ -41,7 +57,7 @@ const projects = [
     ],
   },
   {
-    id: 3,
+    id: 4,
     name: "Apple Tech Marketplace",
     description:
       "An e-commerce platform for Apple products and accessories with deals and category filtering.",
@@ -56,7 +72,7 @@ const projects = [
     ],
   },
   {
-    id: 4,
+    id: 5,
     name: "Electronics & Gadgets Store",
     description:
       "A multi-category online shop featuring electronics, home appliances, and gaming gear with special offers.",
@@ -71,7 +87,7 @@ const projects = [
     ],
   },
   {
-    id: 5,
+    id: 6,
     name: "Home Decor Marketplace",
     description:
       "A curated collection of designer home decor items, including furniture and artisan vases.",
@@ -86,7 +102,7 @@ const projects = [
     ],
   },
   {
-    id: 6,
+    id: 7,
     name: "Digital Game Store",
     description:
       "A gaming platform featuring discounted titles, top sellers, and genre-based browsing.",
@@ -100,7 +116,7 @@ const projects = [
       { id: 4, name: "Chakra UI" },
     ],
   },
-]
+];
 
 
 const WorkSection = () => {
@@ -171,55 +187,25 @@ const WorkSection = () => {
   };
 
   const goToDetail = (id) => {
-    navigate(`/project/${id}`);
+    navigate(`/work/${id}`);
   };
 
   return (
     <Transition>
-      <section ref={containerRef} className="bg-white select-none relative overflow-hidden">
+      <section ref={containerRef} data-bg="#f5f5f0" className="bg-[#f5f5f0] select-none relative overflow-hidden">
 
-        {/* --- Header Section (Minimalist Style) --- */}
-        <div
-          ref={headerRef}
-          className="h-[75vh] flex flex-col items-center justify-center bg-[#0a0a0a] text-white px-6 relative overflow-hidden"
-        >
-          <div className="absolute top-10 left-10 opacity-[0.03] select-none pointer-events-none hidden md:block">
-            <span className="text-9xl font-black">CREATIVE</span>
-          </div>
-
-          <div className="header-text-content w-full max-w-6xl relative">
-            <div className="flex items-center gap-4 mb-8 opacity-40">
-              <div className="w-12 h-[1px] bg-white"></div>
-              <p className="text-[10px] md:text-xs font-mono tracking-[0.5em] uppercase">
-                Available for Freelance
-              </p>
+        {/* --- Text Only Header --- */}
+        <div ref={headerRef} className="h-[50vh] flex items-center px-6 md:px-16">
+          <div className="max-w-6xl mx-auto w-full">
+            <div className="mb-6">
+              <span className="text-[#6366f1] font-mono text-xs font-bold tracking-[0.3em] uppercase">/ Work</span>
             </div>
-
-            <h1 className="text-[15vw] md:text-[11vw] font-light leading-[0.85] tracking-tighter">
-              Selected <br />
-              <span className="font-serif italic text-neutral-400">Projects</span>
+            <h1 className="text-6xl md:text-[10vw] font-black leading-[0.85] tracking-tighter text-[#1a1a2e]">
+              My Projects
             </h1>
-
-            <div className="flex justify-between items-end mt-16">
-              <div className="max-w-[200px] hidden md:block text-left">
-                <p className="text-[10px] leading-relaxed opacity-30 uppercase tracking-widest">
-                  A collection of digital experiences crafted with focus on aesthetics and function.
-                </p>
-              </div>
-
-              <div className="flex flex-col items-center gap-6">
-                <div className="flex flex-col items-center gap-2">
-                  <span className="text-[9px] uppercase tracking-[0.3em] opacity-20">Scroll</span>
-                  <div className="w-[1px] h-12 bg-gradient-to-b from-white/40 to-transparent relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-full bg-white animate-scroll-line"></div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="hidden md:block">
-                <p className="text-xs font-mono opacity-20">© 2024</p>
-              </div>
-            </div>
+            <p className="text-sm md:text-base text-[#1a1a2e]/50 max-w-md mt-4 font-light">
+              Full-stack applications I've built — from hotel booking to e-commerce.
+            </p>
           </div>
         </div>
 
@@ -241,7 +227,7 @@ const WorkSection = () => {
                 <div className="absolute inset-0 bg-black scale-y-0 origin-bottom transition-transform duration-600 ease-[cubic-bezier(0.85,0,0.15,1)] group-hover:scale-y-100 -z-0" />
 
                 <div className="flex flex-col gap-5 relative z-10">
-                  <span className="text-xs md:text-sm font-mono opacity-40 group-hover:opacity-60 transition-opacity text-left">
+                  <span className="text-xs md:text-sm font-mono text-[#6366f1] group-hover:opacity-60 transition-opacity text-left">
                     / 0{index + 1}
                   </span>
                   <h3 className="text-4xl md:text-6xl font-normal tracking-tight transition-transform duration-500 group-hover:translate-x-4 md:group-hover:translate-x-8 text-left">

@@ -1,26 +1,21 @@
-import { useRef, useEffect, useTransition } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { toggleMenu } from "../../redux/slices/menuSlice";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import MenuLink from "./MenuLink";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import Hover from "../Hover";
-import heroImg from '../../assets/images/hero.jpeg';
 
 export default function Menu() {
   const navigate = useNavigate();
   const location = useLocation();
   const pathname = location.pathname;
 
+  const [isOpen, setIsOpen] = useState(false);
+
   const activeLinkRef = useRef(null);
   const overlayRef = useRef(null);
   const contentRef = useRef(null);
   const linksWrapperRef = useRef(null);
   const highlighterRef = useRef(null);
-
-  const isOpen = useSelector((state) => state.menu.isOpen);
-  const dispatch = useDispatch();
-  const [isPending, startTransition] = useTransition();
 
   const state = useRef({
     currentX: 0, targetX: 0,
@@ -62,8 +57,6 @@ export default function Menu() {
         state.current.currHighW = state.current.targetHighW;
       }
 
-      // containerRef animation ကို ဖယ်ထုတ်လိုက်သည်
-
       gsap.to(overlayRef.current, {
         clipPath: "polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%)",
         duration: 1.25, ease: "expo.out"
@@ -74,8 +67,6 @@ export default function Menu() {
       gsap.to(highlighterRef.current, { opacity: 1, duration: 1 });
 
     } else {
-      // containerRef animation ကို ဖယ်ထုတ်လိုက်သည်
-
       gsap.to(overlayRef.current, {
         clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
         duration: 1.25, ease: "expo.out",
@@ -119,30 +110,29 @@ export default function Menu() {
     }
   };
 
- const handleClick = (href) => {
-  if (isPending || pathname === href) return;
+  const toggleMenu = () => {
+    setIsOpen(prev => !prev);
+  };
 
-  // ၁။ အရင်ဆုံး Menu ကို ပိတ်လိုက်မယ်
-  dispatch(toggleMenu());
+  const handleClick = (href) => {
+    if (pathname === href) return;
 
-  // ၂။ ခဏစောင့်ပြီးမှ (Menu ပိတ်တဲ့ animation ပြီးမှ) Page ပြောင်းမယ်
-  setTimeout(() => {
-    startTransition(() => {
+    setIsOpen(false);
+
+    setTimeout(() => {
       navigate(href);
-    });
-  }, 500); // Menu ပိတ်တဲ့ အချိန်နဲ့ ညှိထားတာပါ
-};
+    }, 500);
+  };
 
   return (
     <>
-
       <nav
         style={{ mixBlendMode: 'difference' }}
         className="fixed top-0 left-0 w-full flex justify-between p-8 z-100 uppercase font-bold text-sm text-white pointer-events-none"
       >
         <div
           className="flex items-center gap-2 pointer-events-auto cursor-pointer group"
-          onClick={() => dispatch(toggleMenu())}
+          onClick={toggleMenu}
         >
           <Hover text={isOpen ? "Close" : "Menu"} />
 
@@ -168,7 +158,6 @@ export default function Menu() {
           </div>
         </div>
 
-
         <div className="flex items-center justify-center gap-2 pointer-events-auto">
           <Hover text="write" />
           <svg width="12" height="12" viewBox="0 0 100 100">
@@ -191,7 +180,7 @@ export default function Menu() {
           </div>
 
           <div className="hidden lg:block w-40 aspect-3/4 relative opacity-80">
-            <img src={heroImg} alt="hero" className="w-full h-full object-contain" />
+            <img src="/human.JPG" alt="hero" className="w-full h-full object-contain" />
           </div>
 
           <div className="flex flex-col gap-0.5 text-right text-[0.65rem] lg:text-[0.8rem] font-bold uppercase">
@@ -222,11 +211,10 @@ export default function Menu() {
                 onClick={() => handleClick(href)}
               />
             ))}
-            <div ref={highlighterRef} className="hidden lg:block absolute -bottom-2 left-0 h-2 bg-[#e11010] opacity-0 pointer-events-none" />
+            <div ref={highlighterRef} className="hidden lg:block absolute -bottom-2 left-0 h-2 bg-[#6366f1] opacity-0 pointer-events-none" />
           </div>
         </div>
       </div>
-
     </>
   );
 }

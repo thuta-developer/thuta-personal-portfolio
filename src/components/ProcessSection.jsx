@@ -10,84 +10,41 @@ const ProcessSection = () => {
   const sectionRefs = useRef([]);
 
   const steps = [
-    {
-      id: "01",
-      title: "Understanding the Problem",
-      points: ["Clarify requirements", "Ask questions", "Identify edge cases", "Understand business goal"],
-      signal: "Thinking before coding",
-      bgText: "STRATEGY"
-    },
-    {
-      id: "02",
-      title: "Planning & Breakdown",
-      points: ["Feature breakdown", "Choose suitable tech", "Estimate effort", "Define success criteria"],
-      signal: "Organized, not random coder",
-      bgText: "PLANNING"
-    },
-    {
-      id: "03",
-      title: "Design & Architecture",
-      points: ["Component structure", "State management decisions", "Folder structure", "Reusability & readability"],
-      signal: "Maintainable code",
-      bgText: "STRUCTURE"
-    },
-    {
-      id: "04",
-      title: "Build & Iterate",
-      points: ["Implement core features first", "Refactor when needed", "Follow best practices", "Keep code clean"],
-      signal: "Professional workflow",
-      bgText: "EXECUTION"
-    },
-    {
-      id: "05",
-      title: "Testing & Quality",
-      points: ["Manual testing", "Edge case handling", "Responsive & cross-browser checks", "Fix bugs early"],
-      signal: "Quality mindset",
-      bgText: "INTEGRITY"
-    },
-    {
-      id: "06",
-      title: "Communication & Collaboration",
-      points: ["Share progress regularly", "Ask for feedback", "Use Git properly (PRs, commits)", "Document when needed"],
-      signal: "Team player",
-      bgText: "SYNERGY"
-    },
-    {
-      id: "07",
-      title: "Delivery & Improvement",
-      points: ["Deploy & monitor", "Collect feedback", "Learn and apply improvements"],
-      signal: "Growth mindset",
-      bgText: "EVOLVE"
-    }
+    { step: "01", title: "Understand", desc: "Clarify requirements, goals, and constraints before writing code." },
+    { step: "02", title: "Plan", desc: "Break down features, choose the right tools, and define clear milestones." },
+    { step: "03", title: "Architect", desc: "Design clean component structures, data flow, and scalable systems." },
+    { step: "04", title: "Build", desc: "Implement core features first, refactor as needed, keep code clean." },
+    { step: "05", title: "Test", desc: "Manual testing, edge cases, responsive checks, fix bugs early." },
+    { step: "06", title: "Deliver", desc: "Deploy, monitor, collect feedback, and continuously improve." }
   ];
 
   useEffect(() => {
     const sections = sectionRefs.current;
 
     sections.forEach((section, i) => {
-      const content = section.querySelector('.content-box');
-      const bgTitle = section.querySelector('.bg-title');
+      const line = section.querySelector('.step-line');
+      const content = section.querySelector('.step-content');
 
-      // အလယ်က content တွေ ပေါ်လာတဲ့ animation
       gsap.fromTo(content,
-        { opacity: 0, y: 50, scale: 0.9 },
+        { opacity: 0, y: 30 },
         {
-          opacity: 1, y: 0, scale: 1,
+          opacity: 1, y: 0,
           scrollTrigger: {
             trigger: section,
-            start: "top center",
-            end: "bottom center",
+            start: "top 85%",
+            end: "top 40%",
             scrub: 1,
           }
         }
       );
 
-      // အနောက်က စာလုံးကြီးတွေ ဘေးတိုက်ပြေးတဲ့ animation (Parallax)
-      gsap.to(bgTitle, {
-        xPercent: -20,
+      gsap.to(line, {
+        scaleY: 1,
         scrollTrigger: {
           trigger: section,
-          scrub: 0.5,
+          start: "top 80%",
+          end: "top 40%",
+          scrub: 1,
         }
       });
     });
@@ -97,79 +54,57 @@ const ProcessSection = () => {
 
   return (
     <Transition>
-      <div ref={containerRef} className="bg-[#0a0a0a] text-white">
-
-        {/* Intro Header */}
-        <div className="h-[60vh] flex flex-col justify-center px-8 md:px-24">
-          <h1 className="text-[15vw] font-black leading-none opacity-10">PROCESS</h1>
-          <p className="text-2xl md:text-4xl font-light max-w-3xl -mt-10 md:-mt-20 z-10">
-            A professional workflow designed for <span className="text-[#e11010] font-bold">scalability</span> and <span className="text-[#e11010] font-bold">reliability</span>.
-          </p>
-        </div>
-
-        {/* Process Sections */}
-        {steps.map((step, i) => (
-          <section
-            key={i}
-            ref={el => sectionRefs.current[i] = el}
-            className="relative h-screen flex items-center justify-center overflow-hidden border-b border-white/5"
-          >
-            {/* Background Large Text */}
-            <h2 className="bg-title absolute text-[30vw] font-black text-white/[0.02] whitespace-nowrap pointer-events-none select-none">
-              {step.bgText}
+      <div ref={containerRef} data-bg="#0a0a0a" className="bg-[#0a0a0a] text-white min-h-screen py-24 md:py-32 px-6 md:px-16">
+        <div className="max-w-6xl mx-auto">
+          {/* Header */}
+          <div className="mb-20 md:mb-32">
+            <div className="flex items-center gap-4 mb-6">
+              <span className="text-[#6366f1] font-mono text-xs font-bold tracking-[0.3em] uppercase">Process</span>
+              <div className="h-[1px] w-16 bg-[#6366f1]/30" />
+            </div>
+            <h2 className="text-5xl md:text-8xl font-black tracking-tighter leading-none mb-4">
+              How I <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6366f1] to-[#a855f7]">Work</span>
             </h2>
+            <p className="text-white/40 max-w-xl text-sm md:text-base font-light leading-relaxed">
+              A clean, focused approach to building reliable software — from idea to launch.
+            </p>
+          </div>
 
-            {/* Main Content Card */}
-            <div className="content-box relative z-10 w-full max-w-4xl px-8">
-              <div className="flex items-center gap-4 mb-6">
-                <span className="text-[#e11010] font-mono text-xl">{step.id} —</span>
-                <span className="h-[1px] w-12 bg-[#e11010]/50"></span>
-              </div>
+          {/* Steps Timeline */}
+          <div className="relative">
+            {/* Vertical Line */}
+            <div className="absolute left-[18px] md:left-6 top-0 bottom-0 w-[1px] bg-white/[0.06]" />
 
-              <h3 className="text-4xl md:text-7xl font-black mb-8 uppercase tracking-tighter leading-none">
-                {step.title}
-              </h3>
+            {steps.map((item, i) => (
+              <div key={i} ref={el => sectionRefs.current[i] = el} className="relative flex gap-6 md:gap-10 pb-16 md:pb-20 last:pb-0">
+                {/* Circle + Line */}
+                <div className="flex flex-col items-center">
+                  <div className="relative w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#6366f1]/10 border border-[#6366f1]/20 flex items-center justify-center flex-shrink-0 z-10">
+                    <span className="text-[#6366f1] font-mono text-xs md:text-sm font-bold">{item.step}</span>
+                  </div>
+                  <div className="step-line w-[1px] flex-1 bg-[#6366f1]/20 origin-top scale-y-0 mt-2" />
+                </div>
 
-              <div className="grid md:grid-cols-2 gap-8">
-                <ul className="space-y-4">
-                  {step.points.map((point, idx) => (
-                    <li key={idx} className="flex items-center gap-3 text-lg md:text-xl opacity-70">
-                      <span className="w-1.5 h-1.5 bg-[#e11010] rounded-full"></span>
-                      {point}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="bg-white/5 backdrop-blur-sm p-6 border-l-2 border-[#e11010]">
-                  <p className="text-xs uppercase tracking-widest opacity-40 mb-2 font-bold">Professional Signal</p>
-                  <p className="text-xl md:text-2xl font-medium text-white/90 italic">
-                    "{step.signal}"
-                  </p>
+                {/* Content */}
+                <div className="step-content flex-1 pt-2 md:pt-3">
+                  <h3 className="text-xl md:text-3xl font-bold mb-2 tracking-tight">{item.title}</h3>
+                  <p className="text-white/40 text-sm md:text-base font-light leading-relaxed max-w-lg">{item.desc}</p>
                 </div>
               </div>
-            </div>
-          </section>
-        ))}
+            ))}
+          </div>
 
-        {/* Closing */}
-        <div className="h-screen flex flex-col items-center justify-center text-center px-8">
-          <h2 className="text-5xl md:text-8xl font-black mb-10 uppercase">
-            Let's build<br />something great
-          </h2>
-
-          <a
-            href="mailto:your@email.com"
-            className="group relative px-12 py-5 border border-white/20 overflow-hidden rounded-full text-xl font-bold uppercase tracking-widest"
-          >
-            <span className="relative z-10 group-hover:text-black transition-colors duration-500">
-              Send an Inquiry
-            </span>
-
-            {/* Hover Background */}
-            <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-          </a>
+          {/* CTA */}
+          <div className="mt-20 md:mt-32 pt-12 md:pt-16 border-t border-white/[0.05] text-center">
+            <p className="text-white/30 text-sm mb-6 font-light">Interested in working together?</p>
+            <a
+              href="mailto:thuta.developer@gmail.com"
+              className="inline-flex items-center gap-2 px-8 py-3 bg-[#6366f1] hover:bg-[#4f46e5] rounded-full text-sm font-bold uppercase tracking-widest transition-all duration-300"
+            >
+              Get in Touch →
+            </a>
+          </div>
         </div>
-
       </div>
     </Transition>
   );

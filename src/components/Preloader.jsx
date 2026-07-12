@@ -2,22 +2,18 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { CustomEase } from 'gsap/CustomEase';
 import SplitType from 'split-type';
-import { useDispatch } from 'react-redux';
-import { setFinished } from '../redux/slices/loaderSlice';
 
 gsap.registerPlugin(CustomEase);
 
-const Preloader = () => {
+const Preloader = ({ onFinish }) => {
   const containerRef = useRef();
   const progressBarRef = useRef();
   const counterRef = useRef();
   const headerRef = useRef();
   const copyRef = useRef();
   const imagesContainerRef = useRef();
-  const dispatch = useDispatch();
   const [counter, setCounter] = useState(0);
 
-  // မူရင်း image link များ
   const imageUrls = [
     "https://cdn.cosmos.so/3be2e4e2-4ba8-47c2-9bd7-6b09cc6b82e3?format=jpeg",
     "https://cdn.cosmos.so/91da03b4-8f72-40bd-9531-ce101ecb9508?format=jpeg",
@@ -34,18 +30,18 @@ const Preloader = () => {
 
     const chars = splitHeader.chars;
     const lines = splitCopy.lines;
-    const initialChar = chars[0];
-    const lastChar = chars[chars.length - 1];
 
     gsap.set(chars, { yPercent: (i) => (i % 2 === 0 ? -120 : 120), opacity: 0 });
     gsap.set(lines, { yPercent: 100, opacity: 0 });
 
     const tl = gsap.timeline({
       delay: 0.5,
-      onComplete: () => dispatch(setFinished())
+      onComplete: () => {
+        if (onFinish) onFinish();
+      }
     });
 
-    // 1. Percentage Counter & Progress Bar (၄ စက္ကန့်ကြာမယ်)
+    // 1. Percentage Counter & Progress Bar
     const countData = { value: 0 };
     tl.to(countData, {
       value: 100,
@@ -56,17 +52,16 @@ const Preloader = () => {
 
     tl.to(progressBarRef.current, { scaleX: 1, duration: 4, ease: "power3.inOut" }, 0);
 
-    // 2. Images Reveal (Loading တက်နေတုန်း အလယ်မှာ ဟာမနေအောင် Stagger timing ညှိထားတာ)
+    // 2. Images Reveal
     const imgs = imagesContainerRef.current.querySelectorAll('.img-wrapper');
     const innerImgs = imagesContainerRef.current.querySelectorAll('img');
 
     imgs.forEach((img, i) => {
-      // ပုံတွေကို ၄ စက္ကန့်အတွင်း တစ်ပုံချင်း ဝင်လာအောင် timing ပေးထားပါတယ်
       tl.to(img, {
         clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
         duration: 1.2,
         ease: "hop"
-      }, i * 0.6); // <--- 0.6s စီခြားပြီး တစ်ပုံချင်းပေါ်လာမယ်
+      }, i * 0.6);
     });
 
     innerImgs.forEach((img, i) => {
@@ -81,7 +76,7 @@ const Preloader = () => {
     tl.to(lines, { yPercent: 0, opacity: 1, duration: 2, ease: "hop", stagger: 0.1 }, "-=1.5");
     tl.to(chars, { yPercent: 0, opacity: 1, duration: 1.2, ease: "hop", stagger: 0.02 }, "-=1.2");
 
-    // 4. Exit Phase]
+    // 4. Exit Phase
     tl.to(progressBarRef.current, { transformOrigin: 'right', scaleX: 0, duration: 1, ease: "power3.in" });
     tl.to(counterRef.current, { y: -20, opacity: 0, duration: 0.5 }, "-=0.5");
 
@@ -94,9 +89,8 @@ const Preloader = () => {
 
     tl.to(lines, { y: "-100%", opacity: 0, duration: 1, ease: "hop", stagger: 0.05 }, "-=1");
 
-    // 5. TT Merging Logic 
+    // 5. TT Merging Logic
     tl.to(chars, {
-
       yPercent: (i) => (i === 0 || i === 3 ? 0 : (i % 2 === 0 ? -120 : 120)),
       opacity: (i) => (i === 0 || i === 3 ? 1 : 0),
       duration: 1.2,
@@ -108,15 +102,10 @@ const Preloader = () => {
         }
 
         const centerX = window.innerWidth / 2;
-
-
         const firstChar = chars[0];
-
         const secondTChar = chars[3];
-
         const firstRect = firstChar.getBoundingClientRect();
         const secondRect = secondTChar.getBoundingClientRect();
-
 
         gsap.to(firstChar, {
           x: centerX - firstRect.left - firstRect.width - 2,
@@ -151,7 +140,7 @@ const Preloader = () => {
   return (
     <>
       <div ref={containerRef} className="fixed inset-0 bg-[#0a0a0a] z-101 overflow-hidden">
-        <div ref={progressBarRef} className="absolute top-0 left-0 w-full h-1 bg-white origin-left scale-x-0 z-102" />
+        <div ref={progressBarRef} className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500 origin-left scale-x-0 z-102" />
 
         <div ref={counterRef} className="absolute top-10 right-10 text-white font-['Unbounded'] text-4xl opacity-40">
           {counter}%
