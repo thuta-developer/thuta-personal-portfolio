@@ -59,21 +59,18 @@ const WorkDetail = () => {
       }
     });
 
-    // Gallery horizontal scroll
-    const galleryItems = gsap.utils.toArray(".gallery-item");
-    if (galleryItems.length > 0) {
-      gsap.to(galleryItems, {
-        xPercent: -100 * (galleryItems.length - 1),
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".gallery-wrap",
-          pin: true,
-          scrub: 1.5,
-          start: "top top",
-          end: () => `+=${document.querySelector(".gallery-inner").offsetWidth}`,
-        }
-      });
-    }
+    // Gallery fade-in on scroll (vertical)
+    gsap.from(".gallery-item", {
+      y: 80,
+      opacity: 0,
+      duration: 1,
+      stagger: 0.3,
+      ease: "power4.out",
+      scrollTrigger: {
+        trigger: ".gallery-wrap",
+        start: "top 80%",
+      }
+    });
   }, { scope: container, dependencies: [id] });
 
   if (!project) {
@@ -86,7 +83,7 @@ const WorkDetail = () => {
   }
 
   return (
-    <div ref={container} className="bg-[#0a0a0a] text-white overflow-x-hidden antialiased">
+    <div ref={container} className="bg-[#0a0a0a] text-white antialiased">
       
       {/* --- Hero Section --- */}
       <section className="hero-wrap relative h-screen w-full overflow-hidden">
@@ -114,17 +111,10 @@ const WorkDetail = () => {
             </h1>
             <div className="flex flex-wrap gap-8 md:gap-12 font-mono text-[11px] md:text-xs tracking-[0.2em] uppercase">
               <div>
-                <span className="text-white/30 block mb-1">Year</span>
-                <span className="text-white/70">{project.year || "2024"}</span>
-              </div>
-              <div>
                 <span className="text-white/30 block mb-1">Role</span>
                 <span className="text-white/70">{project.role || "Full Stack"}</span>
               </div>
-              <div>
-                <span className="text-white/30 block mb-1">Type</span>
-                <span className="text-white/70">Web Application</span>
-              </div>
+            
             </div>
           </div>
         </div>
@@ -171,21 +161,21 @@ const WorkDetail = () => {
           </div>
 
           {/* Gallery Section */}
-          <div className="gallery-wrap h-screen flex items-center overflow-hidden reveal-item">
-            <div className="gallery-inner flex gap-8 md:gap-12">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="gallery-item w-[85vw] md:w-[600px] h-[50vh] md:h-[500px] flex-shrink-0 relative group rounded-2xl overflow-hidden">
+          <div className="gallery-wrap reveal-item">
+            <div className="gallery-inner flex gap-8 md:gap-12 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide">
+              {(project.images || [project.image]).map((img, i) => (
+                <div key={i} className="gallery-item w-[85vw] md:w-[600px] h-[50vh] md:h-[500px] flex-shrink-0 relative group rounded-2xl overflow-hidden snap-start">
                   <img
-                    src={i === 1 ? project.image : `https://images.unsplash.com/photo-${1460925895917 + i}?auto=format&fit=crop&w=800&q=80`}
-                    className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105"
-                    alt={`${project.name} snapshot ${i}`}
+                    src={img}
+                    className="w-full h-full object-contain transition-all duration-700 group-hover:scale-105"
+                    alt={`${project.name} snapshot ${i + 1}`}
                     onError={(e) => {
                       e.target.src = `https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80`;
                     }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   <div className="absolute bottom-6 left-6 text-white text-[10px] font-mono uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-2 group-hover:translate-y-0">
-                    View 0{i}
+                    View 0{i + 1}
                   </div>
                 </div>
               ))}
