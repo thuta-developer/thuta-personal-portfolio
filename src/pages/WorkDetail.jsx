@@ -122,7 +122,7 @@ const WorkDetail = () => {
         {/* Scroll indicator */}
         <div className="absolute bottom-8 right-8 md:right-16 flex items-center gap-3 z-10">
           <span className="text-[9px] uppercase tracking-[0.3em] text-white/30">Scroll</span>
-          <div className="w-8 h-[1px] bg-white/20 relative overflow-hidden">
+          <div className="w-8 h-px bg-white/20 relative overflow-hidden">
             <div className="absolute inset-0 bg-white/60 animate-scroll-line-h" />
           </div>
         </div>
