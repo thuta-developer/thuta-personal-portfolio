@@ -110,14 +110,13 @@ export const projects = [
     image: "/projects/ayayarwaddy/ayeyarwaddy.jpeg",
     images: [
       "/projects/ayayarwaddy/ayeyarwaddy1.png",
-      "/projects/ayayarwaddy/ayeyarwaddyweb.jpg",
-      "/projects/ayayarwaddy/aye.png",
       "/projects/ayayarwaddy/ayeyarwaddy2.png",
-      "/projects/ayayarwaddy/ayeyarwaddy4.png",
       "/projects/ayayarwaddy/ayeyarwaddy3.png",
+      "/projects/ayayarwaddy/ayeyarwaddy4.png",
       "/projects/ayayarwaddy/ayeyarwaddy5.png",
       "/projects/ayayarwaddy/ayeyarwaddy6.png",
       "/projects/ayayarwaddy/ayeyarwaddy7.png",
+      "/projects/ayayarwaddy/ayeyarwaddy8.png",
     ],
     role: "Full Stack Development",
     frameworks: [
