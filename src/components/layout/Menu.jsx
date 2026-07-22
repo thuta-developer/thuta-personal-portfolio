@@ -124,6 +124,21 @@ export default function Menu() {
     }, 500);
   };
 
+  const socialLinks = [
+    {
+      name: "LinkedIn",
+      url: "https://www.linkedin.com/in/thu-ta-972b07415",
+    },
+    {
+      name: "GitHub",
+      url: "https://github.com/thuta-developer",
+    },
+    {
+      name: "Telegram",
+      url: "https://t.me/thuta_dev",
+    },
+  ];
+
   return (
     <>
       <nav
@@ -174,8 +189,8 @@ export default function Menu() {
               <Hover text="ThuTa" className="text-xs" />
             </Link>
             <p className="text-xs">Mail</p>
-            <a href="mailto:thuta@gmail.com" className="flex justify-start w-full pb-2">
-              <Hover text="thuta@gmail.com" className="text-xs" />
+            <a href="mailto:thuta.developer@gmail.com" className="flex justify-start w-full pb-2">
+              <Hover text="thuta.developer@gmail.com" className="text-xs" />
             </a>
           </div>
 
@@ -184,9 +199,15 @@ export default function Menu() {
           </div>
 
           <div className="flex flex-col gap-0.5 text-right text-[0.65rem] lg:text-[0.8rem] font-bold uppercase">
-            {["Facebook", "Telegram", "Behance"].map(social => (
-              <a key={social} href={`#${social}`} className="flex justify-end w-full">
-                <Hover text={social} className="text-xs" />
+            {socialLinks.map((social) => (
+              <a
+                key={social.name}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex justify-end w-full"
+              >
+                <Hover text={social.name} className="text-xs" />
               </a>
             ))}
           </div>

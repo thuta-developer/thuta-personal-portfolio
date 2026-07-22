@@ -58,9 +58,9 @@ const Footer = () => {
             <span className="text-[10px] opacity-40 tracking-[4px] uppercase font-bold">Menu</span>
             <div className="flex flex-col gap-4">
               {[
-                { n: 'Curriculum Vitae', h: '/vitae' },
-                { n: 'Case Studies', h: '/studies' },
-                { n: 'Digital Archive', h: '/archive' }
+                { n: 'Curriculum Vitae', h: '/' },
+                { n: 'Case Studies', h: '/' },
+                { n: 'Digital Archive', h: '/' }
               ].map((item, i) => (
                 <a key={item.n} href={item.h} className="group flex items-center text-sm md:text-[16px] opacity-60 hover:opacity-100 transition-all">
                   <span className="text-[9px] mr-3 opacity-40 group-hover:text-[#6366f1]">0{i + 1}.</span>
@@ -76,14 +76,14 @@ const Footer = () => {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6366f1] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#6366f1]"></span>
               </span>
-              <span className="text-[9px] uppercase tracking-widest font-bold">Open for Collaboration</span>
+              {/* <span className="text-[9px] uppercase tracking-widest font-bold">Open for Collaboration</span> */}
             </div>
             
             <div className="flex gap-6 text-[10px] md:text-sm font-semibold uppercase tracking-widest opacity-60">
-              <a target='_blank' rel="noreferrer" href="mailto:heinhtoo421@gmail.com"><Hover className='h-5' text={'Email'} /></a>
-              <a target='_blank' rel="noreferrer" href="/linkedin"><Hover className='h-5' text={'LinkedIn'} /></a>
-              <a target='_blank' rel="noreferrer" href="/github"><Hover className='h-5' text={'GitHub'} /></a>
-              <a target='_blank' rel="noreferrer" href="/facebook"><Hover className='h-5' text={'Facebook'} /></a>
+              <a target='_blank' rel="noreferrer" href="mailto:thuta.developer@gmail.com"><Hover className='h-5' text={'Email'} /></a>
+              <a target='_blank' rel="noreferrer" href="www.linkedin.com/in/thu-ta-972b07415"><Hover className='h-5' text={'LinkedIn'} /></a>
+              <a target='_blank' rel="noreferrer" href="https://github.com/thuta-developer"><Hover className='h-5' text={'GitHub'} /></a>
+              <a target='_blank' rel="noreferrer" href="https://t.me/thuta_dev"><Hover className='h-5' text={'Telegram'} /></a>
             </div>
           </div>
         </div>
